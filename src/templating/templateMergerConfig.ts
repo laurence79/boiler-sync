@@ -1,10 +1,12 @@
-import { MergeConfig } from '../../types/MergeConfig';
-import { packageJsonMerger } from './packageJsonMerger';
-import { jsonMerger } from './jsonMerger';
-import { unionMerger } from './unionMerger';
-import { yamlMerger } from './yamlMerger';
+import {
+  packageJsonMerger,
+  jsonMerger,
+  unionMerger,
+  yamlMerger
+} from '../mergers';
+import { MergeConfig } from '../types/MergeConfig';
 
-export const mergerConfig: MergeConfig[] = [
+export const templateMergerConfig: MergeConfig[] = [
   { filenamePattern: /\.(.*)ignore/, mergeFn: unionMerger },
   { filenamePattern: /\.md/, mergeFn: unionMerger },
   { filenamePattern: /package\.json/, mergeFn: packageJsonMerger },

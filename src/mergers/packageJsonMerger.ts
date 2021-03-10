@@ -1,9 +1,9 @@
 import { Json, JsonMap } from '@laurence79/ts-json';
 import prettier from 'prettier';
 import sortPackageJson from 'sort-package-json';
-import { MergeFunction } from '../../types/MergeFunction';
+import { MergeFunction } from '../types/MergeFunction';
 import { objectMerger } from './objectMerger';
-import { PRETTIER_STYLE } from '../../constants';
+import { PRETTIER_STYLE } from '../constants';
 import { jsonMerger } from './jsonMerger';
 
 function isJsonMap(json: Json): json is JsonMap {

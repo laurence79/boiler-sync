@@ -15,6 +15,7 @@
   ],
   "bin": "./lib/cli.js",
   "scripts": {
+    "start": "./node_modules/.bin/ts-node ./src/cli.ts update ../ts-json",
     "lint": "./node_modules/.bin/eslint --cache 'src/**/*.ts' --quiet",
     "lint:watch": "./node_modules/.bin/esw --cache 'src/**/*.ts' --watch",
     "build": "npm run clean && npm run build:cjs",

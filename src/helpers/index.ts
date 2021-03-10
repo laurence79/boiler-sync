@@ -1,4 +1,3 @@
-export * from './getOutputActionDescription';
 export * from './tryGetErrorMessage';
 export * from './distinctParameterNames';
 export * from './getCombinedFileList';

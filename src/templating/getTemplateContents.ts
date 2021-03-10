@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { expandHandlebars } from './expandHandlebars';
-import { mergerConfig } from './mergers';
+import { templateMergerConfig } from './templateMergerConfig';
 
 export const getTemplateContents = (
   templatePaths: string[],
@@ -28,7 +28,7 @@ export const getTemplateContents = (
     return fileContents[0];
   }
 
-  const mergeFn = mergerConfig.first(({ filenamePattern }) =>
+  const mergeFn = templateMergerConfig.first(({ filenamePattern }) =>
     filenamePattern.test(relativeFilename)
   );
 

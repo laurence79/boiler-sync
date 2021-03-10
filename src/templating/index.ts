@@ -1,3 +1,4 @@
 export * from './getTemplateContents';
-export * from './mergers';
+export * from './templateMergerConfig';
+export * from '../mergers';
 export * from './expandHandlebars';

@@ -1,12 +1,10 @@
 import path from 'path';
-import fs from 'fs';
 import 'ts-array-extensions';
 import { AsyncResult, fail, success } from '@laurence79/ts-results';
 import { loadProjectConfigFile } from '../loaders';
 import { getTemplateContents } from '../templating/getTemplateContents';
 import {
   validateParameters,
-  getOutputActionDescription,
   getCombinedFileList,
   distinctParameterNames
 } from '../helpers';
@@ -14,6 +12,7 @@ import { resolveTemplateChain } from '../resolvers';
 import { GitCloneFail } from '../types/GitCloneFail';
 import { FileLoadFail } from '../types/FileLoadFail';
 import { VOID } from '../constants';
+import { applyFileContent } from '../application';
 
 export const updateCommand = async (
   projectFile: string,
@@ -53,25 +52,17 @@ export const updateCommand = async (
   console.log('\nUpdating files');
 
   getCombinedFileList(templatePaths).forEach(file => {
-    const outputFilename = path.join(projectDir, file);
-
     const newContent = getTemplateContents(
       templatePaths,
       file,
       config.parameters ?? {}
     );
 
-    const actionDescription = getOutputActionDescription(
-      newContent,
-      outputFilename
-    );
+    const outputFilename = path.join(projectDir, file);
 
-    console.info(` ---> ${actionDescription} ${file}`);
+    const action = applyFileContent(outputFilename, newContent);
 
-    if (actionDescription !== 'Skipping') {
-      fs.mkdirSync(path.dirname(outputFilename), { recursive: true });
-      fs.writeFileSync(outputFilename, newContent);
-    }
+    console.log(` ---> ${file} ${action}`);
   });
 
   await cleanUp();
