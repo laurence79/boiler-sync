@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "noEmit": false,
+    "sourceMap": false,
+    "module": "CommonJS",
+    "outDir": "./lib"
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.mock.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
+}

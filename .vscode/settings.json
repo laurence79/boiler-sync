@@ -1,0 +1,28 @@
+{
+  "autoBarrel.ignoreFilePathContainingAnyOf": ".spec,.test,.stories",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.rulers": [80],
+  "eslint.lintTask.enable": true,
+  "eslint.validate": ["typescript"],
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/lib": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.referencesCodeLens.enabled": true,
+  "taskExplorer.pathToMake": "make",
+  "cSpell.words": [
+    "templating",
+    "ttsc",
+    "ttypescript"
+  ]
+}

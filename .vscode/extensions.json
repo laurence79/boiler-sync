@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint",
+    "orta.vscode-jest",
+    "spmeesseman.vscode-taskexplorer",
+    "mikehanson.auto-barrel",
+    "cschleiden.vscode-github-actions"
+  ]
+}

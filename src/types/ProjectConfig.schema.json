@@ -1,0 +1,46 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "Record<string,string>": {
+            "description": "Construct a type with a set of properties K of type T",
+            "type": "object"
+        }
+    },
+    "properties": {
+        "parameters": {
+            "$ref": "#/definitions/Record<string,string>",
+            "description": "The parameters that the template requires."
+        },
+        "uses": {
+            "anyOf": [
+                {
+                    "description": "An object describing the git repository and path within it.",
+                    "properties": {
+                        "path": {
+                            "description": "The relative path to a directory within the repository which contains the\ntemplate.",
+                            "type": "string"
+                        },
+                        "repo": {
+                            "description": "A git repository to clone, in the format understood by `git-source`.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "type": "string"
+                }
+            ],
+            "description": "The source of the template that this project uses."
+        },
+        "version": {
+            "description": "The schema version of this project configuration.",
+            "enum": [
+                1
+            ],
+            "type": "number"
+        }
+    },
+    "type": "object"
+}
+
