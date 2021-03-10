@@ -7,7 +7,6 @@ export * from './resolvers';
 export * from './types/ResolvedTemplateSource';
 export * from './types/MergeFunction';
 export * from './types/FileLoadFail';
-export * from './templating/mergers';
 export * from './types/MergeConfig';
 export * from './types/GitCloneFail';
 export * from './types/FileTemplateSource';
