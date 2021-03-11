@@ -29,14 +29,43 @@ const ensureAllNamed = (arr: JsonArray): Named[] => {
   });
 };
 
-const mergeSteps = (a: JsonArray, b: JsonArray): JsonArray => {
-  const stepsA = ensureAllNamed(a);
-  const stepsB = ensureAllNamed(b);
+const ensureStepsAreUnique = (arr: Named[]): Named[] => {
+  const dupes = arr
+    .groupBy(a => a.name)
+    .filter(g => g.values.length > 1)
+    .map(g => g.key);
 
-  const joined = stepsA.outerJoin(stepsB, (l, r) => l.name === r.name);
+  if (dupes.any()) {
+    throw new Error(
+      `Steps are not unique, found duplicates ${dupes.join(', ')}`
+    );
+  }
+
+  return arr;
+};
+
+const mergeSteps = (a: JsonArray, b: JsonArray): JsonArray => {
+  const stepsA = ensureStepsAreUnique(ensureAllNamed(a)).map((step, index) => ({
+    step,
+    index
+  }));
+
+  const stepsB = ensureStepsAreUnique(ensureAllNamed(b)).map((step, index) => ({
+    step,
+    index
+  }));
+
+  const joined = stepsA
+    .outerJoin(stepsB, (l, r) => l.step.name === r.step.name)
+    .map(p => ({
+      left: p.left?.step,
+      right: p.right?.step,
+      sort: p.left?.index ?? p.right!.index + stepsA.length
+    }))
+    .sort((aa, bb) => aa.sort - bb.sort);
 
   return joined.map(({ left, right }) => {
-    return right ?? left;
+    return right ?? left!;
   });
 };
 
