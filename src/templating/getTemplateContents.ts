@@ -7,18 +7,26 @@ export const getTemplateContents = (
   templatePaths: string[],
   relativeFilename: string,
   parameterValues: Record<string, string>
-): string => {
+): { content: string; mode: number } => {
   const fileContents = templatePaths.compactMap(dir => {
     const filename = path.join(dir, relativeFilename);
 
     if (fs.existsSync(filename)) {
-      return fs.readFileSync(filename, 'utf-8');
+      const { mode } = fs.statSync(filename);
+      return {
+        content: fs.readFileSync(filename, 'utf-8'),
+        mode
+      };
     }
 
     const maybeHbsFile = `${filename}.hbs`;
 
     if (fs.existsSync(maybeHbsFile)) {
-      return expandHandlebars(maybeHbsFile, parameterValues);
+      const { mode } = fs.statSync(maybeHbsFile);
+      return {
+        content: expandHandlebars(maybeHbsFile, parameterValues),
+        mode
+      };
     }
 
     return undefined;
@@ -33,7 +41,10 @@ export const getTemplateContents = (
   );
 
   if (mergeFn) {
-    return mergeFn.mergeFn(fileContents);
+    return {
+      content: mergeFn.mergeFn(fileContents.map(f => f.content)),
+      mode: fileContents.max(f => f.mode)!
+    };
   }
 
   return fileContents.last()!;
