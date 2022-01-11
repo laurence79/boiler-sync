@@ -15,7 +15,7 @@
   ],
   "bin": "./lib/cli.js",
   "scripts": {
-    "start": "./node_modules/.bin/ts-node ./src/cli.ts update ../ts-json",
+    "start": "./node_modules/.bin/ts-node ./src/cli.ts update ../serveplus-identity-service-spec",
     "lint": "./node_modules/.bin/eslint --cache 'src/**/*.ts' --quiet",
     "lint:watch": "./node_modules/.bin/esw --cache 'src/**/*.ts' --watch",
     "build": "npm run clean && npm run build:cjs",
@@ -37,6 +37,7 @@
     "simple-git": "^2.36.1",
     "sort-package-json": "^1.49.0",
     "ts-array-extensions": "^1.0.0",
+    "tslib": "^2.3.1",
     "uuid": "^8.3.2",
     "yaml": "^1.10.0",
     "yargs": "^16.2.0"
