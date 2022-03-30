@@ -6,7 +6,7 @@ import yargs from 'yargs';
 import { updateCommand } from './commands';
 import { DEFAULT_PROJECT_FILENAME } from './constants';
 
-yargs(process.argv.slice(2))
+void yargs(process.argv.slice(2))
   .command(
     'update [project]',
     'updates project boilerplate',
@@ -17,8 +17,7 @@ yargs(process.argv.slice(2))
       });
     },
     argv => {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      (async () => {
+      void (async () => {
         const maybeProjectFile = path.resolve(argv.project as string);
 
         const projectDir = fs.statSync(maybeProjectFile).isDirectory()
